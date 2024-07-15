@@ -1,6 +1,22 @@
 <script setup>
 import { ref, computed } from 'vue'
-const props = defineProps(['title', 'content'])
+// defineProps(['title', 'content'])
+defineProps({
+    title: {
+        type: String,
+        required: true
+    },
+    content: {
+        type: String,
+        default: 'Valor padrão da minha caixa...'
+    },
+    qty: {
+        type: Number,
+        default: 9
+    },
+
+
+})
 const showBox = ref(false)
 const textoBotao = computed(() => showBox.value ? 'Esconder' : 'Mostrar'
 ) 
@@ -8,10 +24,13 @@ const textoBotao = computed(() => showBox.value ? 'Esconder' : 'Mostrar'
 
 <template>
     <div>
-        <button @click="showBox = !showBox">{{ textoBotao }}</button>
+        <button class="butao" @click="showBox = !showBox">
+            {{ textoBotao }}
+        </button>
+        <h3>{{ title }}</h3>
         <div v-if="showBox" class="expand-box">
-            <h1>{{ props.title }}</h1>
-            <p>{{ props.content }}</p>
+            <p>{{ content }}</p>
+            <p>Quantidade: {{ qty }}</p>
         </div>
     </div>
 </template>
@@ -24,5 +43,17 @@ const textoBotao = computed(() => showBox.value ? 'Esconder' : 'Mostrar'
     border-radius: 6px;
     border: 1px black solid;
     box-shadow: 3px 3px 2px 2px gray;
+}
+
+.butao {
+    color: aliceblue;
+    height: 22px;
+    background-color: rgb(43, 43, 43);
+    border-radius: 8px;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+h3 {
+    color: brown;
 }
 </style>
